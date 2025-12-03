@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>求和行动！</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #fff0f5, #e6f7ff);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #d32f2f;
+        }
+        .container {
+            text-align: center;
+            padding: 60px 50px;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 55px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.38);
+            max-width: 90%;
+            backdrop-filter: blur(18px);
+        }
+        h1 {
+            font-size: 4.2rem;
+            margin-bottom: 45px;
+            color: #d32f2f;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+        p {
+            font-size: 1.85rem;
+            margin-bottom: 55px;
+            line-height: 2.0;
+            color: #555;
+        }
+        .action-btn {
+            background: linear-gradient(to bottom, #ff6b6b, #e04e4e);
+            color: white;
+            border: none;
+            padding: 24px 75px;
+            font-size: 1.75rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 28px;
+            transition: all 0.45s ease;
+            box-shadow: 0 14px 40px rgba(0,0,0,0.4);
+        }
+        .action-btn:hover {
+            transform: scale(1.15);
+            background: linear-gradient(to bottom, #ff5252, #c83a3a);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.5);
+        }
+        .note {
+            margin-top: 50px;
+            font-style: italic;
+            color: #777;
+            font-size: 1.35rem;
+            padding-top: 35px;
+            border-top: 1px dashed #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>（陛下大度，网开一面！）</h1>
+        <p>老婆，我犯的错：<br>答应的事情没做到，态度不积极，无所谓的样子</p>
+        
+        <p>请陛下翻牌子：</p>
+        
+        <!-- 重点！填你们的真实细节 -->
+        <button class="action-btn" onclick="alert('✅ 明日下单后到你楼下！\nI LOVE YOU\n')">请你喝好喝的milk tea和水果</button>
+        <button class="action-btn" onclick="alert('✅ 专属礼物做好后立刻带给你！\nI LOVE YOU\n')">送你专属手工小礼物</button>
+        <button class="action-btn" onclick="alert('✅ 已备好money，周五晚带你吃火锅烧烤！\n（你点的，我请客！）\nI LOVE YOU')">请吃大餐饭饭</button>
+        
+        <p class="note">💡 重要提示：I LOVE YOU！！！！！！！！！！！！！！！</p>
+    </div>
+</body>
+</html>

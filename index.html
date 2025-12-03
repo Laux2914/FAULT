@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>老婆我错了！</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #fff0f5, #e6f7ff);
+            height: 100vh;
+            overflow: hidden;
+            color: #d32f2f;
+            position: relative;
+        }
+        /* ❤️ 100个常驻爱心特效（关键！永久飘动不闪烁） */
+        .heart {
+            position: fixed;
+            top: -50px;
+            left: -50px;
+            width: 55px;
+            height: 55px;
+            background: #ff6b6b;
+            transform: rotate(45deg);
+            animation: float 50s infinite linear; /* 永久飘动（50秒/次） */
+            opacity: 0.95;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .heart:after, .heart:before {
+            content: '';
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #ff6b6b;
+        }
+        .heart:after {
+            top: -27px;
+            left: 0;
+        }
+        .heart:before {
+            top: 0;
+            left: -27px;
+        }
+        @keyframes float {
+            0% { transform: rotate(45deg) translate(0, 0); }
+            100% { transform: rotate(45deg) translate(1200px, 1800px); }
+        }
+        /* 手绘弹窗（优化：背景不遮挡爱心） */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        .popup.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .popup-content {
+            background: url('https://i.imgur.com/5WqRcZb.png') no-repeat center center;
+            background-size: 100% 100%;
+            width: 88%;
+            max-width: 420px;
+            padding: 55px 45px;
+            border-radius: 50px;
+            box-shadow: 0 35px 95px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+            animation: float 5s ease-in-out infinite;
+            z-index: 1001;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+        .popup-content h2 {
+            font-size: 2.9rem;
+            margin-bottom: 35px;
+            color: #d32f2f;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+        .popup-content p {
+            font-size: 1.65rem;
+            line-height: 1.9;
+            margin-bottom: 45px;
+            color: #555;
+        }
+        .btn {
+            display: inline-block;
+            padding: 18px 65px;
+            margin: 18px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: bold;
+            width: 80%;
+            max-width: 320px;
+        }
+        .btn-cancel {
+            background: linear-gradient(to bottom, #ff6b6b, #e04e4e);
+            color: white;
+        }
+        .btn-accept {
+            background: linear-gradient(to bottom, #a8e0ff, #61a4ff);
+            color: #333;
+        }
+        .btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 9px 28px rgba(0,0,0,0.35);
+        }
+        .note {
+            font-style: italic;
+            color: #777;
+            font-size: 1.15rem;
+            margin-top: 40px;
+            padding-top: 28px;
+            border-top: 1px dashed #eee;
+        }
+    </style>
+</head>
+<body>
+    <!-- 100个常驻爱心特效（永久飘动！） -->
+    <div id="hearts"></div>
+
+    <!-- 第一步弹窗（有原谅和不原谅） -->
+    <div class="popup" id="step1">
+        <div class="popup-content">
+            <h2>（小的道歉！）</h2>
+            <p>小文宝贝，我错了！是我没做到答应的事情，还找借口和无所谓的态度 😳</p>
+            <p>（小的罪该万死！！！）</p>
+            <div>
+                <button class="btn btn-cancel" onclick="nextStep(4)">原谅我</button>
+                <button class="btn btn-accept" onclick="nextStep(1)">不原谅</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第二步弹窗（有原谅和不原谅） -->
+    <div class="popup" id="step2">
+        <div class="popup-content">
+            <h2>（哭哭呜呜呜呜呜呜呜呜呜！）</h2>
+            <p>亲爱的小文大人原谅我嘛好不好好不好</p>
+            <p>（哭哭呜呜呜呜呜呜呜呜呜！）</p>
+            <div>
+                <button class="btn btn-cancel" onclick="nextStep(4)">原谅我</button>
+                <button class="btn btn-accept" onclick="nextStep(2)">不原谅</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第三步弹窗（两个都是原谅我） -->
+    <div class="popup" id="step3">
+        <div class="popup-content">
+            <h2>（跪求模式！）</h2>
+            <p>我发誓！一定好好做好答应的事情，错误积极改正！</p>
+            <p>（没做到司空震来电我！）</p>
+            <div>
+                <!-- 两个按钮都是“原谅我” -->
+                <button class="btn btn-cancel" onclick="nextStep(4)">原谅我</button>
+                <button class="btn btn-accept" onclick="nextStep(4)">原谅我</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 生成100个常驻爱心特效（永久飘动！）
+        const hearts = document.getElementById('hearts');
+        for (let i = 0; i < 100; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.animationDuration = Math.random() * 30 + 20 + 's'; // 20-50秒慢速
+            hearts.appendChild(heart);
+        }
+
+        // 核心逻辑：步骤控制
+        const steps = ["step1", "step2", "step3"];
+        let currentStep = 0;
+
+        function showStep(stepIndex) {
+            steps.forEach(step => document.getElementById(step).classList.remove("active"));
+            document.getElementById(steps[stepIndex]).classList.add("active");
+            currentStep = stepIndex;
+        }
+
+        function nextStep(nextIndex) {
+            if (nextIndex === 4) {
+                // 100%正确跳转到求和页面
+                window.location.href = 'hehe.html';
+                return;
+            }
+            showStep(nextIndex);
+        }
+
+        // 页面加载后自动显示第一步
+        window.onload = () => {
+            showStep(0);
+        };
+    </script>
+</body>
+</html>
